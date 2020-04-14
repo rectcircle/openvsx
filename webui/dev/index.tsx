@@ -21,7 +21,10 @@ const theme = createMuiTheme({
             lg: 1040,
             xl: 1240
         }
-    }
+    },
+    typography: {
+        fontFamily: `Ubuntu, sans-serif`,
+    },
 });
 
 let serverHost = location.hostname;
