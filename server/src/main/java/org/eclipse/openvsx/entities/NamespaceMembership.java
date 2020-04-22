@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.eclipse.openvsx.json.NamespaceMembershipJson;
+
 @Entity
 public class NamespaceMembership {
 
@@ -37,6 +39,20 @@ public class NamespaceMembership {
     @Column(length = 32)
     String role;
 
+    public NamespaceMembershipJson toJson() {
+        var json = new NamespaceMembershipJson();
+
+        json.id = this.id;
+        json.namespace = this.namespace.name;
+        json.role = this.role;
+
+        json.loginName = this.user.loginName;
+        json.fullName = this.user.fullName;
+        json.avatarUrl = this.user.avatarUrl;
+        json.homepage = this.user.providerUrl;
+
+        return json;
+    }
 
     public long getId() {
         return id;

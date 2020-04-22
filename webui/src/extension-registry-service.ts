@@ -10,7 +10,7 @@
 
 import {
     Extension, UserData, ExtensionCategory, ExtensionReviewList, PersonalAccessToken,
-    SearchResult, NewReview, SuccessResult, ErrorResult, CsrfTokenJson, isError
+    SearchResult, NewReview, SuccessResult, ErrorResult, CsrfTokenJson, isError, Namespace, NamespaceMembership, MembershipSetMethod
 } from "./extension-registry-types";
 import { createAbsoluteURL, addQuery } from "./utils";
 import { sendRequest } from "./server-request";
@@ -116,6 +116,13 @@ export class ExtensionRegistryService {
         });
     }
 
+    getUserByName(name: string): Promise<UserData[]> {
+        return sendRequest({
+            endpoint: createAbsoluteURL([this.serverUrl, 'user', 'search', name]),
+            credentials: true
+        });
+    }
+
     getAccessTokens(user: UserData): Promise<PersonalAccessToken[]> {
         return sendRequest({
             credentials: true,
@@ -171,6 +178,36 @@ export class ExtensionRegistryService {
             credentials: true,
             endpoint: createAbsoluteURL([this.serverUrl, "user", "csrf"])
         });
+    }
+
+    getNamespaces(): Promise<Namespace[]> {
+        return sendRequest({
+            credentials: true,
+            endpoint: createAbsoluteURL([this.serverUrl, "user", "namespaces"])
+        });
+    }
+
+    getNamespaceMembers(namespace: string): Promise<NamespaceMembership[]> {
+        return sendRequest({
+            credentials: true,
+            endpoint: createAbsoluteURL([this.serverUrl, "user", "members", "namespace", namespace])
+        });
+    }
+
+    async setNamespaceMembers(namespace: string, userLogin: string, setMethod: MembershipSetMethod): Promise<(SuccessResult | ErrorResult)[]> {
+        const csrfToken = await this.getCsrfToken();
+        const headers: Record<string, string> = {};
+        if (!isError(csrfToken)) {
+            headers[csrfToken.header] = csrfToken.value;
+        }
+        return sendRequest(
+            {
+                headers,
+                method: 'POST',
+                credentials: true,
+                endpoint: createAbsoluteURL([this.serverUrl, 'user', 'namespace', 'member', 'set', namespace, userLogin, setMethod])
+            }
+        );
     }
 
 }

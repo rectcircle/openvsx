@@ -140,3 +140,18 @@ export interface CsrfTokenJson {
     value: string;
     header: string;
 }
+
+export interface NamespaceMembership extends UserData {
+    id: number;
+    namespace: string;
+    role: string;
+}
+
+export interface Namespace {
+    id: number;
+    name: string;
+    extensions: Extension[];
+    memberships: NamespaceMembership[];
+}
+
+export type MembershipSetMethod = 'add' | 'remove';
