@@ -10,11 +10,9 @@
 
 import * as React from 'react';
 
-import { Theme, Toolbar as Bar, Box, IconButton, Typography } from '@material-ui/core';
+import { Theme, Toolbar as Bar, Box, IconButton } from '@material-ui/core';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import { UserAvatar } from '../../pages/user/avatar';
-import { Optional } from '../optional';
-import ThemeSwitcher from '../theme-switcher/index';
 import { Link as RouteLink } from 'react-router-dom';
 import { WithStyles, createStyles, withStyles } from '@material-ui/styles';
 import { PageSettings } from '../../page-settings';
@@ -22,10 +20,9 @@ import { ExtensionRegistryService } from '../../extension-registry-service';
 import { ExtensionListRoutes } from '../../pages/extension-list/extension-list-container';
 import { UserData } from '../../extension-registry-types';
 import { ErrorResponse } from '../../server-request';
-import OpenVSXLogo from './openvsx-registry-logo';
 
 const toolbarStyles = (theme: Theme) => createStyles({
-     toolbar: {
+    toolbar: {
         justifyContent: 'space-between'
     },
     toolbarLogo: {
@@ -44,41 +41,37 @@ const toolbarStyles = (theme: Theme) => createStyles({
     },
 });
 
-const ToolbarComponent = (props: Toolbar.Props) => (
-    <Bar classes={{ root: props.classes.toolbar }}>
-        <Box>
-            <RouteLink to={ExtensionListRoutes.MAIN} className={props.classes.link} aria-label={`Home - ${props.pageSettings.pageTitle}`}>
-                <Box className={props.classes.alignVertically}>
-                    <OpenVSXLogo
-                        className={props.classes.toolbarLogo}
-                        darkMode={props.darkMode}
-                    />
-                    <Optional enabled={Boolean(props.pageSettings.toolbarText)}>
-                        <Typography variant='h6' noWrap>{props.pageSettings.toolbarText}</Typography>
-                    </Optional>
-                </Box>
-            </RouteLink>
-        </Box>
-        <Box display='flex' alignItems='center'>
-            <ThemeSwitcher
-                darkMode={props.darkMode}
-                setDarkMode={props.setDarkMode}
-            />
-            {
-                props.user ?
-                    <UserAvatar
-                        user={props.user}
-                        service={props.service}
-                        setError={props.setTheError}
-                    />
-                    :
-                    <IconButton href={props.service.getLoginUrl()} title="Log In">
-                        <AccountBoxIcon />
-                    </IconButton>
-            }
-        </Box>
-    </Bar>
-);
+const ToolbarComponent = (props: Toolbar.Props) => {
+    const ToolbarContent = props.pageSettings.toolbarContent;
+    return (
+        <Bar classes={{ root: props.classes.toolbar }}>
+            <Box>
+                <RouteLink to={ExtensionListRoutes.MAIN} className={props.classes.link} aria-label={`Home - ${props.pageSettings.pageTitle}`}>
+                    <Box className={props.classes.alignVertically}>
+                        <ToolbarContent
+                            darkMode={props.darkMode}
+                            className={props.classes.toolbarLogo}
+                        />
+                    </Box>
+                </RouteLink>
+            </Box>
+            <Box display='flex' alignItems='center'>
+                {
+                    props.user ?
+                        <UserAvatar
+                            user={props.user}
+                            service={props.service}
+                            setError={props.setTheError}
+                        />
+                        :
+                        <IconButton href={props.service.getLoginUrl()} title="Log In">
+                            <AccountBoxIcon />
+                        </IconButton>
+                }
+            </Box>
+        </Bar>
+    );
+};
 
 export namespace Toolbar {
     export interface Props extends WithStyles<typeof toolbarStyles> {

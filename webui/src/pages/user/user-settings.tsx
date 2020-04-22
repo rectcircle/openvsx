@@ -76,7 +76,12 @@ class UserSettingsComponent extends React.Component<UserSettingsComponent.Props>
                         <Grid item className={this.props.classes.info}>
                             <Box>
                                 <Route path={UserSettingsRoutes.PROFILE}>
-                                    <UserSettingsProfile service={this.props.service} user={user} />
+                                    <UserSettingsProfile
+                                        service={this.props.service}
+                                        user={user}
+                                        darkMode={this.props.darkMode}
+                                        setDarkMode={this.props.setDarkMode}
+                                    />
                                 </Route>
                                 <Route path={UserSettingsRoutes.TOKENS}>
                                     <UserSettingsTokens
@@ -101,6 +106,8 @@ export namespace UserSettingsComponent {
         service: ExtensionRegistryService;
         pageSettings: PageSettings;
         setError: (err: Error | Partial<ErrorResponse>) => void;
+        darkMode: boolean;
+        setDarkMode: () => void;
     }
 }
 

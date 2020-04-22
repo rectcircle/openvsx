@@ -1,10 +1,11 @@
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import  ThemeProvider from '../src/theme-provider';
+import  ThemeController from '../src/theme-controller';
 import { Extension } from '../src/extension-registry-types';
 import { PageSettings } from '../src/page-settings';
 import { ExtensionRegistryService } from '../src/extension-registry-service';
+import OpenVSXLogo from './openvsx-registry-logo';
 
 let serverHost = location.hostname;
 if (serverHost.startsWith('3000-')) {
@@ -19,8 +20,7 @@ const extensionURL = (extension: Extension) => encodeURIComponent(
 const pageSettings: PageSettings = {
     pageTitle: 'Open VSX Registry',
     listHeaderTitle: 'Extensions for VS Code Compatible Editors',
-    logoAlt: 'Open VSX Registry',
-    logoURL: '/openvsx-registry.svg',
+    toolbarContent: OpenVSXLogo,
     extensionDefaultIconURL: '/default-icon.png',
     namespaceAccessInfoURL: 'https://github.com/eclipse/openvsx/wiki/Namespace-Access',
     reportAbuseHref: extension => `mailto:abuse@example.com?subject=Report%20Abuse%20-%20${extension.namespace}.${extension.name}&Body=${reportAbuseText}%0A%0A${extensionURL(extension)}`,
@@ -30,7 +30,7 @@ const pageSettings: PageSettings = {
 const node = document.getElementById('main');
 
 ReactDOM.render(<BrowserRouter>
-   <ThemeProvider 
+   <ThemeController 
         service={service}
         pageSettings={pageSettings}
    />

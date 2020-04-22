@@ -12,10 +12,8 @@ import { Extension } from "./extension-registry-types";
 
 export interface PageSettings {
     pageTitle: string;
-    toolbarText?: string;
     listHeaderTitle?: string;
-    logoURL?: string;
-    logoAlt?: string;
+    toolbarContent?: any;
     extensionDefaultIconURL?: string;
     namespaceAccessInfoURL?: string;
     reportAbuseHref?: (extension: Extension) => string;

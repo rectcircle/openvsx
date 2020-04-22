@@ -10,13 +10,13 @@
 
 import * as React from 'react';
 
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
 import { Main } from './main';
-import { PageSettings } from '../src/page-settings';
-import { ExtensionRegistryService } from '../src/extension-registry-service';
+import { PageSettings } from './page-settings';
+import { ExtensionRegistryService } from './extension-registry-service';
 
-const ThemeProvider = (props: ThemeProvider.Props) => {
+const ThemeController = (props: ThemeController.Props) => {
     const [darkMode, setDarkMode] = React.useState<boolean>(false);
 
     const theme = createMuiTheme({
@@ -45,22 +45,22 @@ const ThemeProvider = (props: ThemeProvider.Props) => {
     };
 
     return (
-        <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
             <Main
                 service={props.service}
                 pageSettings={props.pageSettings}
                 setDarkMode={setTheDarkMode}
                 darkMode={darkMode}
             />
-        </MuiThemeProvider>
+        </ThemeProvider>
     );
 };
 
-export namespace ThemeProvider {
+export namespace ThemeController {
     export interface Props {
         pageSettings: PageSettings;
         service: ExtensionRegistryService;
     }
 }
 
-export default ThemeProvider;
+export default ThemeController;

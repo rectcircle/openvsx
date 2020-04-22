@@ -13,6 +13,7 @@ import * as React from "react";
 function OpenVSXLogo(props: { className: string, darkMode: boolean }) {
   return (
     <svg viewBox="0 0 725.4 131" className={props.className}>
+      <title>Open VSX Registry</title>
       <path
         d="M30 44.2L52.6 5H7.3zM4.6 88.5h45.3L27.2 49.4zm51 0l22.6 39.2 22.6-39.2z"
         fill="#c160ef"

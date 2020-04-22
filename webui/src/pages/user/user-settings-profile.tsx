@@ -12,6 +12,7 @@ import * as React from "react";
 import { Theme, createStyles, WithStyles, withStyles, Grid, Typography, Avatar } from "@material-ui/core";
 import { UserData } from "../../extension-registry-types";
 import { ExtensionRegistryService } from "../../extension-registry-service";
+import ThemeSwitcher from "../../components/theme-switcher";
 
 const profileStyle = (theme: Theme) => createStyles({
     profile: {
@@ -40,6 +41,15 @@ const profileStyle = (theme: Theme) => createStyles({
         [theme.breakpoints.down('sm')]: {
             margin: '0 auto',
         }
+    },
+    theme: {
+        maxWidth: '14rem',
+        margin: '2rem auto',
+        display: 'flex',
+        alignItems: 'center',
+        [theme.breakpoints.down('sm')]: {
+            justifyContent: 'center',
+        }
     }
 });
 
@@ -58,6 +68,12 @@ class UserSettingsProfileComponent extends React.Component<UserSettingsProfileCo
                     <Typography variant='h5' gutterBottom>Profile</Typography>
                     <Typography variant='body1'>Login name: {this.props.user.loginName}</Typography>
                     <Typography variant='body1'>Full name: {this.props.user.fullName}</Typography>
+                    <div className={this.props.classes.theme}>
+                        <ThemeSwitcher
+                            darkMode={this.props.darkMode}
+                            setDarkMode={this.props.setDarkMode}
+                        />
+                    </div>
                 </Grid>
                 <Grid item>
                     <Avatar classes={{ root: this.props.classes.avatar }} variant='rounded' src={this.props.user.avatarUrl} />
@@ -69,8 +85,10 @@ class UserSettingsProfileComponent extends React.Component<UserSettingsProfileCo
 
 export namespace UserSettingsProfileComponent {
     export interface Props extends WithStyles<typeof profileStyle> {
-        user: UserData
-        service: ExtensionRegistryService
+        user: UserData;
+        service: ExtensionRegistryService;
+        darkMode: boolean;
+        setDarkMode: () => void;
     }
 
     export interface State {

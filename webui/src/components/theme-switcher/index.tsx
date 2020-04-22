@@ -9,18 +9,23 @@
  ********************************************************************************/
 
 import * as React from 'react';
-import { Switch } from '@material-ui/core';
+import { Switch, FormControlLabel } from '@material-ui/core';
 import IconSun from './sun';
 import IconMoon from './moon';
 
 const ThemeSwitcher = (props: ThemeSwitcher.Props) => (
-    <Switch
-        checked={props.darkMode}
-        onChange={props.setDarkMode}
-        icon={<IconSun height={20} />}
-        checkedIcon={<IconMoon height={20} />}
-        color="default"
-    />
+   <FormControlLabel
+        control={
+            <Switch
+                checked={props.darkMode}
+                onChange={props.setDarkMode}
+                icon={<IconSun height={20} />}
+                checkedIcon={<IconMoon height={20} />}
+                color="default"
+            />
+        }
+        label="Dark Theme"
+   />
 );
 
 export namespace ThemeSwitcher {

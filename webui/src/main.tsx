@@ -109,6 +109,8 @@ const MainComponent = (props: Main.Props) => {
                                         service={props.service}
                                         pageSettings={props.pageSettings}
                                         setError={setTheError}
+                                        darkMode={props.darkMode}
+                                        setDarkMode={props.setDarkMode}
                                     />
                                 } />
                             <Route path={ExtensionDetailRoutes.MAIN}
