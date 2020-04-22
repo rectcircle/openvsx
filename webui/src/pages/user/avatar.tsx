@@ -12,7 +12,7 @@ import * as React from 'react';
 import { withStyles, createStyles } from '@material-ui/styles';
 import { Theme, WithStyles, Avatar, Menu, Typography, MenuItem, Link, Divider } from '@material-ui/core';
 import { Link as RouteLink } from 'react-router-dom';
-import { Optional } from '../../custom-mui-components/optional';
+import { Optional } from '../../components/optional';
 import { UserData, isError } from '../../extension-registry-types';
 import { ExtensionRegistryService } from '../../extension-registry-service';
 import { UserSettingsRoutes } from './user-settings';

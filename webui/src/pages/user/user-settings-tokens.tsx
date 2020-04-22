@@ -11,8 +11,8 @@
 import * as React from "react";
 import { Theme, createStyles, WithStyles, withStyles, Typography, Box, Paper, Button } from "@material-ui/core";
 import { toLocalTime } from "../../utils";
-import { Optional } from "../../custom-mui-components/optional";
-import { DelayedLoadIndicator } from "../../custom-mui-components/delayed-load-indicator";
+import { Optional } from "../../components/optional";
+import { DelayedLoadIndicator } from "../../components/delayed-load-indicator";
 import { UserData, PersonalAccessToken } from "../../extension-registry-types";
 import { ExtensionRegistryService } from "../../extension-registry-service";
 import { GenerateTokenDialog } from "./generate-token-dialog";

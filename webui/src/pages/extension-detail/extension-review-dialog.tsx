@@ -11,7 +11,7 @@
 import * as React from "react";
 import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Theme, CircularProgress } from "@material-ui/core";
 import { withStyles, createStyles, WithStyles } from "@material-ui/styles";
-import { Optional } from "../../custom-mui-components/optional";
+import { Optional } from "../../components/optional";
 import { ExtensionRegistryService } from "../../extension-registry-service";
 import { UserData, ExtensionRaw, isError } from "../../extension-registry-types";
 import { ExtensionRatingStarSetter } from "./extension-rating-star-setter";

@@ -16,8 +16,8 @@ import {
 } from "@material-ui/core";
 import { UserData, PersonalAccessToken, isError } from "../../extension-registry-types";
 import { ExtensionRegistryService } from "../../extension-registry-service";
-import { Optional } from "../../custom-mui-components/optional";
-import { CopyToClipboard } from "../../custom-mui-components/copy-to-clipboard";
+import { Optional } from "../../components/optional";
+import { CopyToClipboard } from "../../components/copy-to-clipboard";
 import { ErrorResponse } from '../../server-request';
 
 const TOKEN_DESCRIPTION_SIZE = 255;
